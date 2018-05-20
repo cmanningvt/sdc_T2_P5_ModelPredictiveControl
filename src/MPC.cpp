@@ -130,6 +130,8 @@ class FG_eval {
           cte1 - ((f0 - y0) + (v0 * CppAD::sin(epsi0) * dt));
       fg[1 + epsi_start + t] =
           epsi1 - ((psi0 - psides0) + v0 * delta0 / Lf * dt);
+      fg[1 + delta_start + t] = fg[delta_start + t];
+      fg[1 + a_start + t] = fg[a_start + t];
     }
   }
 };
