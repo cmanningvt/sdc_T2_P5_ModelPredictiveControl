@@ -134,6 +134,7 @@ int main() {
 
           // A polynomial of order 3 is fitted to the data
           auto coeffs = polyfit(xpts, ypts, 3);
+          auto coeffs_deriv = derivative(coeffs);
 
           //.. add (x,y) points to mpc_vals here, points are in reference to the vehicle's coordinate system
           // the points in the simulator are connected by a Green line
@@ -148,7 +149,7 @@ int main() {
 
           // Due to the sign starting at 0, the orientation error is -f'(x).
           // derivative of coeffs[0] + coeffs[1] * x -> coeffs[1]
-          double epsi = psi - atan(coeffs[1]);
+          double epsi = -1 * atan(polyeval(coeffs_deriv, px));
 
           // Prepare state vector, x, y, and psi are init to zero because we are 
           // in the vehicles coordinate system
