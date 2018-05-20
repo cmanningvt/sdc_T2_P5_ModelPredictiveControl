@@ -152,7 +152,10 @@ int main() {
           // Get outputs from controller to output values
           // NOTE: Remember to divide by deg2rad(25) before you send the steering value back.
           // Otherwise the values will be in between [-deg2rad(25), deg2rad(25] instead of [-1, 1].
-          steer_value = vars[6]/deg2rad(25);
+          // NOTE: if delta is positive we rotate counter-clockwise, or turn left. In the 
+          // simulator however, a positive value implies a right turn and a negative value implies 
+          // a left turn. Change the sign to account for this.
+          steer_value = -vars[6]/deg2rad(25);
           throttle_value = vars[7];
 
           json msgJson;
