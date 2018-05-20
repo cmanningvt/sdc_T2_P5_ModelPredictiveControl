@@ -65,6 +65,15 @@ Eigen::VectorXd polyfit(Eigen::VectorXd xvals, Eigen::VectorXd yvals,
   return result;
 }
 
+// Calculate a derivative from a set of coefficients
+Eigen::VectorXd derivative(Eigen::VectorXd f_coeffs) {
+  Eigen::VectorXd f_deriv(f_coeffs.size() - 1);
+  for (unsigned int i=1; i<f_coeffs.size(); ++i) {
+    f_deriv[i-1] = i * f_coeffs[i];
+  }
+  return f_deriv;
+}
+
 int main() {
   uWS::Hub h;
 
