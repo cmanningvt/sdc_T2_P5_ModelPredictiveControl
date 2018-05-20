@@ -139,8 +139,8 @@ int main() {
           //.. add (x,y) points to mpc_vals here, points are in reference to the vehicle's coordinate system
           // the points in the simulator are connected by a Green line
           for (unsigned int i=0; i < 10; ++i) {
-            mpc_x_vals.push_back((double) i);
-            mpc_y_vals.push_back(polyeval(coeffs, (double) i));
+            mpc_x_vals.push_back((double) 5*i);
+            mpc_y_vals.push_back(polyeval(coeffs, (double) 5*i));
           }
           
           // The cross track error is calculated by evaluating at polynomial at x, f(x)
