@@ -100,6 +100,11 @@ int main() {
           double py = j[1]["y"];
           double psi = j[1]["psi"];
           double v = j[1]["speed"];
+          double steering_angle = j[1]["steering_angle"];
+          double throttle = j[1]["throttle"];
+
+          // Convert v from mph to mps
+          v *= 0.44704;
 
           // Initialize vectors for displaying waypoints in simulator
           vector<double> next_x_vals;
@@ -151,10 +156,25 @@ int main() {
           // derivative of coeffs[0] + coeffs[1] * x -> coeffs[1]
           double epsi = -1 * atan(polyeval(coeffs_deriv, px));
 
-          // Prepare state vector, x, y, and psi are init to zero because we are 
-          // in the vehicles coordinate system
+          // Define latency in seconds and Lf
+          double latency = 0.100;
+          const double Lf = 2.67;
+
+          // Prepare state vector while accounting for latency
           Eigen::VectorXd state(6);
-          state << 0, 0, 0, v, cte, epsi;
+          // Recall the equations for the model:
+          // x_[t+1] = x[t] + v[t] * cos(psi[t]) * dt
+          // y_[t+1] = y[t] + v[t] * sin(psi[t]) * dt
+          // psi_[t+1] = psi[t] + v[t] / Lf * delta[t] * dt
+          // v_[t+1] = v[t] + a[t] * dt
+          // cte[t+1] = f(x[t]) - y[t] + v[t] * sin(epsi[t]) * dt
+          // epsi[t+1] = psi[t] - psides[t] + v[t] * delta[t] / Lf * dt
+          state[0] = 0 + v * cos(0) * latency; // x
+          state[1] = 0 + v * sin(0) * latency; // y
+          state[2] = 0 + v / Lf * steering_angle * latency; // psi
+          state[3] = v + throttle * latency; // v
+          state[4] = polyeval(coeffs, 0) - 0 + v * sin(epsi) * latency; // cte
+          state[5] = epsi + v * steering_angle / Lf * latency; // epsi
 
           // Run mpc solver
           auto vars = mpc.Solve(state, coeffs);
