@@ -173,7 +173,7 @@ int main() {
           state[1] = 0 + v * sin(0) * latency; // y
           state[2] = 0 + v / Lf * -steering_angle * latency; // psi
           state[3] = v + throttle * latency; // v
-          state[4] = polyeval(coeffs, 0) - 0 + v * sin(epsi) * latency; // cte
+          state[4] = cte - 0 + v * sin(epsi) * latency; // cte
           state[5] = epsi + v * steering_angle / Lf * latency; // epsi
 
           // Run mpc solver
