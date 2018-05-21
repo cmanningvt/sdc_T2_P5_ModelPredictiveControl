@@ -19,26 +19,47 @@
 The following is the the output of the command "cmake .. && make"
 
 -- The C compiler identification is GNU 5.4.0
+
 -- The CXX compiler identification is GNU 5.4.0
+
 -- Check for working C compiler: /usr/bin/cc
+
 -- Check for working C compiler: /usr/bin/cc -- works
+
 -- Detecting C compiler ABI info
+
 -- Detecting C compiler ABI info - done
+
 -- Detecting C compile features
+
 -- Detecting C compile features - done
+
 -- Check for working CXX compiler: /usr/bin/c++
+
 -- Check for working CXX compiler: /usr/bin/c++ -- works
+
 -- Detecting CXX compiler ABI info
+
 -- Detecting CXX compiler ABI info - done
+
 -- Detecting CXX compile features
+
 -- Detecting CXX compile features - done
+
 -- Configuring done
+
 -- Generating done
+
 -- Build files have been written to: /sdc_T2_P5_ModelPredictiveControl/build
+
 Scanning dependencies of target mpc
+
 [ 33%] Building CXX object CMakeFiles/mpc.dir/src/MPC.cpp.o
+
 [ 66%] Building CXX object CMakeFiles/mpc.dir/src/main.cpp.o
+
 [100%] Linking CXX executable mpc
+
 [100%] Built target mpc
 
 
