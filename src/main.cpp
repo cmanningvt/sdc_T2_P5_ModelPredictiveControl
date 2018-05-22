@@ -174,7 +174,7 @@ int main() {
           state[2] = 0 + v / Lf * -steering_angle * latency; // psi
           state[3] = v + throttle * latency; // v
           state[4] = cte - 0 + v * sin(epsi) * latency; // cte
-          state[5] = epsi + v * steering_angle / Lf * latency; // epsi
+          state[5] = epsi + v * -steering_angle / Lf * latency; // epsi
 
           // Run mpc solver
           auto vars = mpc.Solve(state, coeffs);
